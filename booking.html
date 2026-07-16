@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en-IN" data-x="html" data-x-toggle="html-overflow-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/vendors.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="image/logo/logo_.png">
+  <title>Book Your Stay - Meridian Hilltop Yercaud</title>
+  <meta name="description" content="Book your stay at Meridian Hilltop Resort Yercaud. Multi-step booking: choose room, add-ons, and payment." />
+
+  <style>
+    @media (max-width: 768px) {
+      .baseCard__image { overflow: visible; }
+      .baseCard__badge { bottom: 12px; left: 12px; font-size: 13px; padding: 6px 10px; z-index: 2; }
+    }
+    @media (max-width: 575px) {
+      .header__logo img { height: 95px; width: 100% !important; }
+    }
+    .menuFullScreen__right { width: 35%; }
+    .menuFullScreen-links { gap: 28px; }
+    p { font-size: 15px; color: var(--color-accent-1); margin: 0; }
+    .layout-pb-lg { padding-bottom: 100px; }
+    .layout-pt-lg { padding-top: 90px; }
+    .pt-100 { padding-top: 48px !important; }
+    .menuFullScreen-links-subnav { position: absolute; top: 10%; left: 40%; }
+    @media (max-width: 991px) {
+      .menuFullScreen-links-subnav { overflow: hidden; position: relative; top: unset; left: unset; max-height: 0; padding-left: 0; pointer-events: none; opacity: 1; }
+    }
+    .layout-pt-lg { padding-top: 30px; }
+    .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 65px; height: 65px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s; text-decoration: none; }
+    .whatsapp-float:hover { transform: scale(1.1); color: #fff; }
+
+    /* Steps Progress */
+    .steps-progress { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 50px; }
+    .step-indicator { display: flex; align-items: center; }
+    .step-circle { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 18px; font-weight: 600; border: 2px solid #ddd; color: #999; background: #fff; transition: all 0.3s; flex-shrink: 0; }
+    .step-circle.active { border-color: #122223; color: #fff; background: #122223; }
+    .step-circle.done { border-color: #468C72; color: #fff; background: #468C72; }
+    .step-label { font-family: 'Jost', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin: 0 12px; color: #999; white-space: nowrap; }
+    .step-label.active { color: #122223; font-weight: 600; }
+    .step-label.done { color: #468C72; }
+    .step-line { width: 60px; height: 2px; background: #ddd; margin: 0 8px; transition: background 0.3s; }
+    .step-line.done { background: #468C72; }
+    @media (max-width: 575px) {
+      .step-line { width: 30px; }
+      .step-label { font-size: 10px; margin: 0 6px; }
+      .step-circle { width: 36px; height: 36px; font-size: 14px; }
+    }
+
+    /* Form Steps */
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Booking Card */
+    .booking-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+    @media (max-width: 575px) { .booking-card { padding: 24px; } }
+    .booking-card .form-group { margin-bottom: 20px; }
+    .booking-card label { font-family: 'Jost', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #122223; display: block; margin-bottom: 8px; }
+    .booking-card input, .booking-card select, .booking-card textarea { width: 100%; padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 15px; color: #122223; background: #f8f5f0; transition: all 0.3s; }
+    .booking-card input:focus, .booking-card select:focus, .booking-card textarea:focus { outline: none; border-color: #122223; background: #fff; }
+    .booking-card textarea { resize: vertical; }
+
+    /* Room Select Radio Cards */
+    .room-radio-card { display: flex; align-items: center; gap: 16px; padding: 16px; border: 2px solid #e8e8e8; border-radius: 12px; cursor: pointer; transition: all 0.3s; margin-bottom: 12px; }
+    .room-radio-card:hover { border-color: #122223; }
+    .room-radio-card.selected { border-color: #122223; background: rgba(18,34,35,0.03); }
+    .room-radio-card input[type="radio"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; position: relative; flex-shrink: 0; padding: 0; background: none; }
+    .room-radio-card input[type="radio"]:checked { border-color: #122223; }
+    .room-radio-card input[type="radio"]:checked::after { content: ''; position: absolute; top: 3px; left: 3px; width: 10px; height: 10px; background: #122223; border-radius: 50%; }
+    .room-radio-card .room-info { flex: 1; }
+    .room-radio-card .room-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #122223; }
+    .room-radio-card .room-price { font-family: 'Jost', sans-serif; font-size: 14px; color: #468C72; font-weight: 600; }
+    .room-radio-card .room-thumb { width: 80px; height: 60px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .room-radio-card .room-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Add-on Cards */
+    .addon-group-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #122223; margin: 24px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #e8e8e8; }
+    .addon-group-title:first-of-type { margin-top: 0; }
+    .addon-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 2px solid #e8e8e8; border-radius: 12px; transition: all 0.3s; margin-bottom: 10px; }
+    .addon-card.paid { border-left: 4px solid #468C72; }
+    .addon-card.free { border-left: 4px solid #ccc; }
+    .addon-card:hover { border-color: #122223; }
+    .addon-card input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 4px; position: relative; flex-shrink: 0; cursor: pointer; padding: 0; background: none; }
+    .addon-card input[type="checkbox"]:checked { border-color: #122223; background: #122223; }
+    .addon-card input[type="checkbox"]:checked::after { content: '\2713'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #fff; font-size: 14px; font-weight: 700; }
+    .addon-card .addon-info { flex: 1; }
+    .addon-card .addon-name { font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 600; color: #122223; }
+    .addon-card .addon-name .badge-free { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .addon-card .addon-name .badge-paid { display: inline-block; background: #fff3e0; color: #e65100; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .addon-card .addon-desc { font-family: 'Jost', sans-serif; font-size: 13px; color: rgba(18,34,35,0.6); margin-top: 2px; }
+    .addon-card .addon-price { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 600; color: #468C72; white-space: nowrap; }
+
+    /* Pay Mode */
+    .pay-option { display: flex; align-items: center; gap: 16px; padding: 20px; border: 2px solid #e8e8e8; border-radius: 12px; cursor: pointer; transition: all 0.3s; margin-bottom: 12px; }
+    .pay-option:hover { border-color: #122223; }
+    .pay-option.selected { border-color: #122223; background: rgba(18,34,35,0.03); }
+    .pay-option input[type="radio"] { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 50%; position: relative; flex-shrink: 0; padding: 0; background: none; }
+    .pay-option input[type="radio"]:checked { border-color: #122223; }
+    .pay-option input[type="radio"]:checked::after { content: ''; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: #122223; border-radius: 50%; }
+    .pay-option .pay-icon { font-size: 28px; width: 40px; text-align: center; color: #122223; }
+    .pay-option .pay-info { flex: 1; }
+    .pay-option .pay-name { font-family: 'Jost', sans-serif; font-size: 16px; font-weight: 600; color: #122223; }
+    .pay-option .pay-desc { font-family: 'Jost', sans-serif; font-size: 13px; color: rgba(18,34,35,0.6); }
+
+    /* Summary Sidebar */
+    .summary-sidebar { position: sticky; top: 130px; }
+    .summary-card { background: #f8f5f0; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .summary-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #122223; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #e8e8e8; }
+    .summary-card .summary-row { display: flex; justify-content: space-between; padding: 8px 0; font-family: 'Jost', sans-serif; font-size: 14px; color: #122223; }
+    .summary-card .summary-row .label { color: rgba(18,34,35,0.5); }
+    .summary-card .summary-row.total { border-top: 1px solid #ddd; margin-top: 8px; padding-top: 12px; font-weight: 700; font-size: 16px; }
+    .summary-card .summary-row.total .label { color: #122223; }
+    .summary-card .summary-row.total .value { color: #468C72; }
+
+    /* Buttons */
+    .btn-nav { padding: 14px 36px; border: none; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+    .btn-prev { background: #f0f0f0; color: #122223; }
+    .btn-prev:hover { background: #e0e0e0; }
+    .btn-next { background: #122223; color: #fff; }
+    .btn-next:hover { background: #1d3334; }
+    .btn-submit { background: #25D366; color: #fff; }
+    .btn-submit:hover { background: #1da851; }
+  </style>
+</head>
+<body>
+
+  <!-- FULLSCREEN MENU -->
+  <div class="menuFullScreen js-menuFullScreen">
+    <div class="menuFullScreen__topMobile js-menuFullScreen-topMobile">
+      <div class="d-flex items-center text-white js-menuFullScreen-toggle">
+        <i class="icon-menu text-9"></i>
+        <div class="text-15 uppercase ml-30 sm:d-none">Menu</div>
+      </div>
+      <div><img src="image/logo/logo.png" alt="Meridian Hilltop"></div>
+    </div>
+    <div class="menuFullScreen__mobile__bg js-menuFullScreen-mobile-bg"></div>
+    <div class="menuFullScreen__left">
+      <div class="menuFullScreen__bg js-menuFullScreen-bg"><img src="image/a/2.jpg" alt="bg"></div>
+      <button class="menuFullScreen__close js-menuFullScreen-toggle js-menuFullScreen-close-btn">
+        <span class="icon"><span></span><span></span></span> CLOSE
+      </button>
+      <div class="menuFullScreen-links js-menuFullScreen-links">
+        <div class="menuFullScreen-links__item"><a href="index.html">HOME</a></div>
+        <div class="menuFullScreen-links__item"><a href="booking.html">BOOK NOW</a></div>
+        <div class="menuFullScreen-links__item"><a href="rooms.html">ROOMS</a></div>
+        <div class="menuFullScreen-links__item"><a href="dining.html">DINING</a></div>
+        <div class="menuFullScreen-links__item"><a href="amenities.html">AMENITIES</a></div>
+        <div class="menuFullScreen-links__item"><a href="gallery.html">GALLERY</a></div>
+        <div class="menuFullScreen-links__item"><a href="guide.html">LOCAL GUIDE</a></div>
+        <div class="menuFullScreen-links__item"><a href="policies.html">POLICIES</a></div>
+        <div class="menuFullScreen-links__item"><a href="index.html#contact">CONTACT US</a></div>
+      </div>
+    </div>
+    <div class="menuFullScreen__right js-menuFullScreen-right">
+      <div class="text-center">
+        <div class="mb-100" style="margin-bottom:30px !important"><img src="image/logo/logo_.png" alt="logo" style="width:23%;"></div>
+        <div class="mt-40"><div class="text-30 text-sec fw-500">Location</div><div class="mt-10">Yercaud, Tamil Nadu</div></div>
+        <div class="mt-40">
+          <div class="text-30 text-sec fw-500">Phone Support</div>
+          <div class="mt-10">
+            <div><a href="tel:+919843977729">+91 9843977729</a></div>
+            <div><a href="mailto:meridianhilltopyercaud@gmail.com">meridianhilltopyercaud@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="mt-40"><div class="text-30 text-sec fw-500">Connect With Us</div><div class="mt-10"><a href="tel:+919843977729">+91 9843977729</a></div></div>
+      </div>
+    </div>
+    <div class="menuFullScreen__bottomMobile js-menuFullScreen-buttomMobile">
+      <a href="booking.html" class="button rounded-200 w-1/1 py-20 -light-1 bg-accent-2">BOOK YOUR STAY</a>
+      <a href="tel:+919843977729" class="d-flex items-center mt-40"><i class="icon-phone mr-10"></i><span>+91 9843977729 | +91 4281290739</span></a>
+      <a href="#" class="d-flex mt-20"><i class="icon-map mr-10"></i><span>Yercaud, Tamil Nadu</span></a>
+      <a href="mailto:meridianhilltopyercaud@gmail.com" class="d-flex items-center mt-20"><i class="icon-mail mr-10"></i><span>meridianhilltopyercaud@gmail.com</span></a>
+    </div>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor js-cursor">
+    <div class="cursor__wrapper">
+      <div class="cursor__follower js-follower"></div>
+      <div class="cursor__label js-label"></div>
+      <div class="cursor__icon js-icon"></div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/919843977729" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+  <main>
+
+    <!-- HEADER -->
+    <header class="header -h-110 -blur js-header" data-add-bg="bg-accent-1" data-x="header" data-x-toggle="-is-menu-opened">
+      <div class="container">
+        <div class="header__container h-full items-center">
+          <div class="header__left d-flex items-center">
+            <button class="d-flex items-center js-menuFullScreen-toggle">
+              <i class="icon-menu text-9 text-white"></i>
+              <div class="text-15 uppercase text-white ml-30 sm:d-none">Menu</div>
+            </button>
+            <div class="d-flex items-center ml-60 xl:d-none">
+              <i class="icon-phone text-20 text-white mr-30"></i>
+              <div class="text-15 uppercase text-white">+91 9843977729</div>
+            </div>
+          </div>
+          <div class="header__center">
+            <div class="header__logo" style="text-align:center;">
+              <a href="index.html"><img src="image/logo/logo.png" alt="Meridian Hilltop" style="width:23%;"></a>
+            </div>
+          </div>
+          <div class="header__right d-flex items-center h-full">
+            <div class="d-flex items-center ml-60 xl:d-none" style="margin-right:1rem !important;">
+              <i class="icon-mail text-20 text-white mr-30"></i>
+              <div class="text-15 text-white">meridianhilltopyercaud@gmail.com</div>
+            </div>
+            <a href="booking.html" class="button -md -outline-white text-white xl:d-none">BOOK NOW</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero -type-3 bg-accent-1" style="min-height:auto; padding-bottom:60px;">
+      <div class="container">
+        <div class="row items-center">
+          <div class="col-12 text-center pt-100">
+            <div class="hero__subtitle text-15 uppercase text-white mb-20">BOOK YOUR STAY</div>
+            <h1 class="hero__title text-white" style="font-size:72px;">Reserve Your Room</h1>
+            <p class="text-white mt-20" style="opacity:0.8; font-size:17px;">Three easy steps to your perfect getaway.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section class="layout-pt-lg layout-pb-lg bg-light-1">
+      <div class="container">
+
+        <!-- Steps Progress -->
+        <div class="steps-progress">
+          <div class="step-indicator">
+            <div class="step-circle active" id="stepCircle1">1</div>
+            <div class="step-label active" id="stepLabel1">Room & Guests</div>
+          </div>
+          <div class="step-line" id="stepLine1"></div>
+          <div class="step-indicator">
+            <div class="step-circle" id="stepCircle2">2</div>
+            <div class="step-label" id="stepLabel2">Add-ons</div>
+          </div>
+          <div class="step-line" id="stepLine2"></div>
+          <div class="step-indicator">
+            <div class="step-circle" id="stepCircle3">3</div>
+            <div class="step-label" id="stepLabel3">Payment</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- LEFT: Form -->
+          <div class="col-lg-8">
+
+            <!-- STEP 1: Room & Guests -->
+            <div class="form-step active" id="step1">
+              <div class="booking-card">
+                <h3 style="font-family:'Cormorant Garamond',serif; font-size:32px; color:#122223; margin-bottom:4px;">Room & Guests</h3>
+                <p style="font-family:'Jost',sans-serif; color:rgba(18,34,35,0.6); margin-bottom:24px;">Select your room type and number of guests.</p>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Check-in Date</label>
+                      <input type="date" id="checkin">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Check-out Date</label>
+                      <input type="date" id="checkout">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Select Room Type</label>
+                  <div id="roomList">
+                    <label class="room-radio-card selected" data-price="5499" id="deluxe">
+                      <input type="radio" name="room" value="Deluxe Room - INR 5,499/night" checked>
+                      <div class="room-thumb"><img src="image/r/1.jpg" alt="Deluxe Room"></div>
+                      <div class="room-info"><div class="room-name">Deluxe Room</div><div class="room-price">INR 5,499 / night</div></div>
+                    </label>
+                    <label class="room-radio-card" data-price="6999" id="retro">
+                      <input type="radio" name="room" value="Retro View - INR 6,999/night">
+                      <div class="room-thumb"><img src="image/r/2.jpg" alt="Retro View"></div>
+                      <div class="room-info"><div class="room-name">Retro View</div><div class="room-price">INR 6,999 / night</div></div>
+                    </label>
+                    <label class="room-radio-card" data-price="8999" id="valley">
+                      <input type="radio" name="room" value="Valley View / Club - INR 8,999/night">
+                      <div class="room-thumb"><img src="image/r/3.jpg" alt="Valley View"></div>
+                      <div class="room-info"><div class="room-name">Valley View / Club</div><div class="room-price">INR 8,999 / night</div></div>
+                    </label>
+                    <label class="room-radio-card" data-price="12999" id="master">
+                      <input type="radio" name="room" value="Master Suite - INR 12,999/night">
+                      <div class="room-thumb"><img src="image/r/4.jpg" alt="Master Suite"></div>
+                      <div class="room-info"><div class="room-name">Master Suite</div><div class="room-price">INR 12,999 / night</div></div>
+                    </label>
+                    <label class="room-radio-card" data-price="21999" id="presidential">
+                      <input type="radio" name="room" value="Presidential Suite - INR 21,999/night">
+                      <div class="room-thumb"><img src="image/r/5.jpg" alt="Presidential Suite"></div>
+                      <div class="room-info"><div class="room-name">Presidential Suite</div><div class="room-price">INR 21,999 / night</div></div>
+                    </label>
+                    <label class="room-radio-card" data-price="24999" id="family">
+                      <input type="radio" name="room" value="Family Suite - INR 24,999/night">
+                      <div class="room-thumb"><img src="image/r/6.jpg" alt="Family Suite"></div>
+                      <div class="room-info"><div class="room-name">Family Suite</div><div class="room-price">INR 24,999 / night</div></div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Rooms</label>
+                      <select id="rooms">
+                        <option value="1">1 Room</option>
+                        <option value="2">2 Rooms</option>
+                        <option value="3">3 Rooms</option>
+                        <option value="4">4+ Rooms</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Adults</label>
+                      <select id="adults">
+                        <option value="1">1 Adult</option>
+                        <option value="2" selected>2 Adults</option>
+                        <option value="3">3 Adults</option>
+                        <option value="4">4 Adults</option>
+                        <option value="5">5+ Adults</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Children</label>
+                      <select id="children">
+                        <option value="0">0 Children</option>
+                        <option value="1">1 Child</option>
+                        <option value="2">2 Children</option>
+                        <option value="3">3+ Children</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-end mt-20">
+                  <button class="btn-nav btn-next" onclick="goToStep(2)">Next: Add-ons <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: Add-ons -->
+            <div class="form-step" id="step2">
+              <div class="booking-card">
+                <h3 style="font-family:'Cormorant Garamond',serif; font-size:32px; color:#122223; margin-bottom:4px;">Add-ons</h3>
+                <p style="font-family:'Jost',sans-serif; color:rgba(18,34,35,0.6); margin-bottom:24px;">Customize your stay with meals, transport, and experiences.</p>
+
+                <!-- Meal Plan -->
+                <div class="addon-group-title">Meal Plans <span style="font-size:13px; color:rgba(18,34,35,0.4); font-family:'Jost',sans-serif;">(Select one)</span></div>
+                <label class="addon-card paid" data-addon-price="0">
+                  <input type="radio" name="mealplan" value="CP - Breakfast only" checked>
+                  <div class="addon-info">
+                    <div class="addon-name">CP Plan <span class="badge-paid">Included</span></div>
+                    <div class="addon-desc">Staying with Breakfast</div>
+                  </div>
+                  <div class="addon-price">Included</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="1500">
+                  <input type="radio" name="mealplan" value="MAP - Breakfast + Lunch or Dinner">
+                  <div class="addon-info">
+                    <div class="addon-name">MAP Plan <span class="badge-paid">+ ₹1,500</span></div>
+                    <div class="addon-desc">Stay + Breakfast + Lunch OR Dinner per person per day</div>
+                  </div>
+                  <div class="addon-price">+ ₹1,500</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="2500">
+                  <input type="radio" name="mealplan" value="AP - Breakfast + Lunch + Dinner">
+                  <div class="addon-info">
+                    <div class="addon-name">AP Plan <span class="badge-paid">+ ₹2,500</span></div>
+                    <div class="addon-desc">Stay + Breakfast + Lunch + Dinner per person per day</div>
+                  </div>
+                  <div class="addon-price">+ ₹2,500</div>
+                </label>
+
+                <!-- Transport -->
+                <div class="addon-group-title">Transport <span style="font-size:13px; color:rgba(18,34,35,0.4); font-family:'Jost',sans-serif;">(Paid add-ons)</span></div>
+                <label class="addon-card paid" data-addon-price="1500">
+                  <input type="checkbox" value="Salem Airport Pickup - INR 1,500">
+                  <div class="addon-info">
+                    <div class="addon-name">Salem Airport Pickup <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">One-way pickup from Salem Airport (50.9 km)</div>
+                  </div>
+                  <div class="addon-price">₹1,500</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="1500">
+                  <input type="checkbox" value="Salem Airport Drop - INR 1,500">
+                  <div class="addon-info">
+                    <div class="addon-name">Salem Airport Drop <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">One-way drop to Salem Airport</div>
+                  </div>
+                  <div class="addon-price">₹1,500</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="1000">
+                  <input type="checkbox" value="Salem Railway Station Pickup - INR 1,000">
+                  <div class="addon-info">
+                    <div class="addon-name">Railway Station Pickup <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">One-way pickup from Salem Town Station (32 km)</div>
+                  </div>
+                  <div class="addon-price">₹1,000</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="1000">
+                  <input type="checkbox" value="Salem Railway Station Drop - INR 1,000">
+                  <div class="addon-info">
+                    <div class="addon-name">Railway Station Drop <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">One-way drop to Salem Town Station</div>
+                  </div>
+                  <div class="addon-price">₹1,000</div>
+                </label>
+
+                <!-- Experiences -->
+                <div class="addon-group-title">Experiences <span style="font-size:13px; color:rgba(18,34,35,0.4); font-family:'Jost',sans-serif;">(Paid add-ons)</span></div>
+                <label class="addon-card paid" data-addon-price="1500">
+                  <input type="checkbox" value="Candle Light Dinner - INR 1,500">
+                  <div class="addon-info">
+                    <div class="addon-name">Candle Light Dinner <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">Exclusive romantic dinner setup (on request)</div>
+                  </div>
+                  <div class="addon-price">₹1,500</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="500">
+                  <input type="checkbox" value="Extra Bed - INR 500/night">
+                  <div class="addon-info">
+                    <div class="addon-name">Extra Bed <span class="badge-paid">Paid</span></div>
+                    <div class="addon-desc">Additional bed in room per night</div>
+                  </div>
+                  <div class="addon-price">₹500 / night</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="0">
+                  <input type="checkbox" value="Early Check-in">
+                  <div class="addon-info">
+                    <div class="addon-name">Early Check-in <span class="badge-paid">On Request</span></div>
+                    <div class="addon-desc">Subject to availability with extra charges</div>
+                  </div>
+                  <div class="addon-price">On Request</div>
+                </label>
+                <label class="addon-card paid" data-addon-price="0">
+                  <input type="checkbox" value="Late Check-out">
+                  <div class="addon-info">
+                    <div class="addon-name">Late Check-out <span class="badge-paid">On Request</span></div>
+                    <div class="addon-desc">Subject to availability with extra charges</div>
+                  </div>
+                  <div class="addon-price">On Request</div>
+                </label>
+
+                <!-- Free Amenities -->
+                <div class="addon-group-title">Complimentary Amenities <span style="font-size:13px; color:rgba(18,34,35,0.4); font-family:'Jost',sans-serif;">(Free)</span></div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">Swimming Pool <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">Largest indoor pool in Yercaud. Open 8 AM - 6 PM</div>
+                  </div>
+                </div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">Campfire with Music <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">Common campfire under the stars</div>
+                  </div>
+                </div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">Indoor Games <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">Billiards, Table Tennis, Carrom, Chess</div>
+                  </div>
+                </div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">Free Wi-Fi <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">Available in lobby & restaurant</div>
+                  </div>
+                </div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">Smart TV & Cable <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">In all rooms</div>
+                  </div>
+                </div>
+                <div class="addon-card free">
+                  <i class="fas fa-check-circle" style="color:#2e7d32; font-size:20px; width:22px; text-align:center;"></i>
+                  <div class="addon-info">
+                    <div class="addon-name">24-Hour Hot Water <span class="badge-free">Free</span></div>
+                    <div class="addon-desc">Centralized system</div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-between mt-20">
+                  <button class="btn-nav btn-prev" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+                  <button class="btn-nav btn-next" onclick="goToStep(3)">Next: Payment <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Payment -->
+            <div class="form-step" id="step3">
+              <div class="booking-card">
+                <h3 style="font-family:'Cormorant Garamond',serif; font-size:32px; color:#122223; margin-bottom:4px;">Payment & Contact</h3>
+                <p style="font-family:'Jost',sans-serif; color:rgba(18,34,35,0.6); margin-bottom:24px;">Your details and preferred payment method.</p>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Your Name</label>
+                      <input type="text" id="name" placeholder="Full name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Phone Number</label>
+                      <input type="tel" id="phone" placeholder="Phone number">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email (Optional)</label>
+                  <input type="email" id="email" placeholder="Email address">
+                </div>
+
+                <div class="form-group">
+                  <label>Special Requests</label>
+                  <textarea id="requests" rows="3" placeholder="Any special requests, preferences, or questions..."></textarea>
+                </div>
+
+                <div class="addon-group-title">Payment Method</div>
+                <label class="pay-option selected">
+                  <input type="radio" name="paymode" value="Cash" checked>
+                  <div class="pay-icon"><i class="fas fa-money-bill-wave"></i></div>
+                  <div class="pay-info"><div class="pay-name">Cash</div><div class="pay-desc">Pay at the hotel during check-in</div></div>
+                </label>
+                <label class="pay-option">
+                  <input type="radio" name="paymode" value="UPI / Google Pay / PhonePe">
+                  <div class="pay-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                  <div class="pay-info"><div class="pay-name">UPI / GPay / PhonePe</div><div class="pay-desc">Pay via UPI before arrival</div></div>
+                </label>
+                <label class="pay-option">
+                  <input type="radio" name="paymode" value="Bank Transfer (NEFT/IMPS)">
+                  <div class="pay-icon"><i class="fas fa-building-columns"></i></div>
+                  <div class="pay-info"><div class="pay-name">Bank Transfer</div><div class="pay-desc">NEFT / IMPS transfer</div></div>
+                </label>
+                <label class="pay-option">
+                  <input type="radio" name="paymode" value="Paytm">
+                  <div class="pay-icon"><i class="fas fa-qrcode"></i></div>
+                  <div class="pay-info"><div class="pay-name">Paytm</div><div class="pay-desc">Pay via Paytm wallet or UPI</div></div>
+                </label>
+
+                <div class="d-flex justify-between mt-20">
+                  <button class="btn-nav btn-prev" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                  <button class="btn-nav btn-submit" onclick="submitBooking()"><i class="fab fa-whatsapp"></i> Send Booking</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Summary Sidebar -->
+          <div class="col-lg-4">
+            <div class="summary-sidebar">
+              <div class="summary-card">
+                <h4>Booking Summary</h4>
+                <div class="summary-row"><span class="label">Room</span><span id="summaryRoom">Deluxe Room</span></div>
+                <div class="summary-row"><span class="label">Check-in</span><span id="summaryCheckin">—</span></div>
+                <div class="summary-row"><span class="label">Check-out</span><span id="summaryCheckout">—</span></div>
+                <div class="summary-row"><span class="label">Guests</span><span id="summaryGuests">2 Adults</span></div>
+                <div class="summary-row"><span class="label">Rooms</span><span id="summaryRooms">1</span></div>
+                <div class="summary-row"><span class="label">Meal Plan</span><span id="summaryMeal">CP</span></div>
+                <div class="summary-row"><span class="label">Add-ons</span><span id="summaryAddons">None</span></div>
+                <div class="summary-row"><span class="label">Payment</span><span id="summaryPay">Cash</span></div>
+                <div class="summary-row total"><span class="label">Est. Total</span><span class="value" id="summaryTotal">₹5,499</span></div>
+              </div>
+              <div class="summary-card">
+                <h4>Need Help?</h4>
+                <div class="summary-row"><span class="label">Phone</span><span>+91 9843977729</span></div>
+                <div class="summary-row"><span class="label">Alt</span><span>+91 4281290739</span></div>
+                <div class="summary-row" style="border-bottom:none;"><span class="label">Email</span><span>meridianhilltopyercaud@gmail.com</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer -type-2 bg-accent-1 -text-white">
+      <div class="footer__main">
+        <div class="container">
+          <div class="footer__grid">
+            <div>
+              <h4 class="text-30 fw-500 mb-10">About Us</h4>
+              <div class="d-flex flex-column">
+                <img src="image/logo/logo_.png" alt="Meridian Hilltop" style="width:60%; margin-bottom:15px;">
+                <p class="text-white">Escape to Meridian Hilltop Resort, where luxury meets tranquility amidst the scenic hills of Yercaud at 5,000 ft.</p>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-30 fw-500 mb-10">Location</h4>
+              <div class="d-flex flex-column md:mt-20">
+                <div><a class="d-block text-15 lh-17 mb-20" href="#">Meridian Hill Top,<br>MGR Nagar (Way To Shevaroyan Temple),<br>Yercaud, Tamil Nadu 636602</a></div>
+                <div class="d-flex flex-column">
+                  <div><a class="d-block text-15" href="tel:+919843977729">+91 9843977729<br>+91 4281290739</a></div>
+                  <div class="mt-10"><a class="d-block text-15" href="mailto:meridianhilltopyercaud@gmail.com">meridianhilltopyercaud@gmail.com</a></div>
+                </div>
+              </div>
+              <div class="text-15 mt-20">Social Media Pages</div>
+              <div class="row x-gap-25 y-gap-10 items-center pt-20 md:pt-40">
+                <div class="col-auto"><a href="https://www.instagram.com/meridian_hilltop" target="_blank" class="d-flex"><i class="icon-instagram text-13"></i></a></div>
+                <div class="col-auto"><a href="https://www.facebook.com/105141808643495" target="_blank" class="d-flex"><i class="icon-facebook text-13"></i></a></div>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-30 fw-500">Quick Links</h4>
+              <div class="d-flex flex-column mt-40 md:mt-20">
+                <div class="mb-20"><a class="d-block text-15" href="index.html">Home</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Book Now</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="rooms.html">Rooms</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="dining.html">Dining</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="amenities.html">Amenities</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="gallery.html">Gallery</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="guide.html">Local Guide</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="policies.html">Policies</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="index.html#contact">Contact Us</a></div>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-30 fw-500">Room Types</h4>
+              <div class="d-flex flex-column mt-40 md:mt-20">
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Deluxe Room</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Retro View</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Valley View / Club</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Master Suite</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Presidential Suite</a></div>
+                <div class="mb-20"><a class="d-block text-15" href="booking.html">Family Suite</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="container">
+          <div class="row y-gap-30 justify-between md:justify-center items-center">
+            <div class="col-sm-auto">            <div class="text-15 text-center">Copyright &copy; 2026 Meridian Hilltop &mdash; Crafted by <a href="https://cognisutra.in" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Cognisutra</a></div></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a id="whatsappChats" href="https://api.whatsapp.com/send?phone=919843977729&text=Hi%21%20I%20am%20Looking%20for%20stay%21." target="_blank" rel="nofollow" style="display:inline;">
+      <img class="img-whatsapp" loading="lazy" src="https://www.ezeecentrix.com/images/whatsAppIcon.png" width="66" height="66" alt="whatsapp" style="margin-left:6.8rem;">
+    </a>
+
+  </main>
+
+  <script src="js/vendors.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function() {
+      var menu = document.querySelector('.js-menuFullScreen');
+      if (!menu) return;
+      function openMenu() { menu.classList.add('is-active'); document.body.classList.add('overflow-hidden'); }
+      function closeMenu() { menu.classList.remove('is-active'); document.body.classList.remove('overflow-hidden'); }
+      document.querySelectorAll('.js-menuFullScreen-toggle').forEach(function(el) {
+        el.addEventListener('click', function() {
+          menu.classList.contains('is-active') ? closeMenu() : openMenu();
+        });
+      });
+      document.querySelectorAll('.js-menuFullScreen-close-btn').forEach(function(el) {
+        el.addEventListener('click', closeMenu);
+      });
+      document.querySelectorAll('.menuFullScreen-links a').forEach(function(el) {
+        el.addEventListener('click', closeMenu);
+      });
+    })();
+  </script>
+  <script>
+    var currentStep = 1;
+
+    // Room card selection
+    document.querySelectorAll('.room-radio-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.room-radio-card').forEach(function(c) { c.classList.remove('selected'); });
+        this.classList.add('selected');
+        this.querySelector('input[type="radio"]').checked = true;
+        updateSummary();
+      });
+    });
+
+    // Pay option selection
+    document.querySelectorAll('.pay-option').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.pay-option').forEach(function(o) { o.classList.remove('selected'); });
+        this.classList.add('selected');
+        this.querySelector('input[type="radio"]').checked = true;
+        updateSummary();
+      });
+    });
+
+    // Add-on checkbox change
+    document.querySelectorAll('.addon-card input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', updateSummary);
+    });
+
+    // Meal plan radio change
+    document.querySelectorAll('.addon-card input[type="radio"]').forEach(function(rb) {
+      rb.addEventListener('change', updateSummary);
+    });
+
+    // All selects/inputs
+    document.querySelectorAll('#rooms, #adults, #children, #checkin, #checkout').forEach(function(el) {
+      el.addEventListener('change', updateSummary);
+    });
+
+    function goToStep(step) {
+      document.querySelectorAll('.form-step').forEach(function(s) { s.classList.remove('active'); });
+      document.getElementById('step' + step).classList.add('active');
+
+      for (var i = 1; i <= 3; i++) {
+        var circle = document.getElementById('stepCircle' + i);
+        var label = document.getElementById('stepLabel' + i);
+        var line = document.getElementById('stepLine' + i);
+        circle.classList.remove('active', 'done');
+        label.classList.remove('active', 'done');
+        if (line) line.classList.remove('done');
+        if (i < step) {
+          circle.classList.add('done');
+          label.classList.add('done');
+          if (line) line.classList.add('done');
+        } else if (i === step) {
+          circle.classList.add('active');
+          label.classList.add('active');
+        }
+      }
+
+      currentStep = step;
+      updateSummary();
+      window.scrollTo({ top: document.querySelector('.steps-progress').offsetTop - 140, behavior: 'smooth' });
+    }
+
+    function updateSummary() {
+      var room = document.querySelector('input[name="room"]:checked');
+      var roomName = room ? room.value.split(' - ')[0] : '—';
+      var checkin = document.getElementById('checkin').value || '—';
+      var checkout = document.getElementById('checkout').value || '—';
+      var adults = document.getElementById('adults').value;
+      var children = document.getElementById('children').value;
+      var rooms = document.getElementById('rooms').value;
+
+      var mealSelected = document.querySelector('input[name="mealplan"]:checked');
+      var mealName = mealSelected ? mealSelected.value.split(' - ')[0] : 'CP';
+
+      document.getElementById('summaryRoom').textContent = roomName;
+      document.getElementById('summaryCheckin').textContent = checkin;
+      document.getElementById('summaryCheckout').textContent = checkout;
+      document.getElementById('summaryGuests').textContent = adults + ' Adult(s), ' + children + ' Child';
+      document.getElementById('summaryRooms').textContent = rooms;
+
+      var addonNames = [];
+      document.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(function(cb) {
+        addonNames.push(cb.value.split(' - ')[0]);
+      });
+      document.getElementById('summaryAddons').textContent = addonNames.length ? addonNames.join(', ') : 'None';
+
+      var payMethod = document.querySelector('input[name="paymode"]:checked');
+      document.getElementById('summaryPay').textContent = payMethod ? payMethod.value : '—';
+      document.getElementById('summaryMeal').textContent = mealName;
+
+      // Calculate price
+      var roomPrice = 0;
+      var roomCard = document.querySelector('.room-radio-card.selected');
+      if (roomCard) roomPrice = parseInt(roomCard.getAttribute('data-price')) || 0;
+      var nights = 1;
+      if (checkin !== '—' && checkout !== '—') {
+        var d1 = new Date(checkin), d2 = new Date(checkout);
+        var diff = Math.ceil((d2 - d1) / (1000*60*60*24));
+        if (diff > 0) nights = diff;
+      }
+      var roomTotal = roomPrice * parseInt(rooms) * nights;
+
+      var mealExtra = 0;
+      if (mealSelected) {
+        var mealCard = mealSelected.closest('.addon-card');
+        if (mealCard) mealExtra = parseInt(mealCard.getAttribute('data-addon-price')) || 0;
+        mealExtra = mealExtra * parseInt(adults) * nights;
+      }
+
+      var addonTotal = 0;
+      document.querySelectorAll('.addon-card.paid input[type="checkbox"]:checked').forEach(function(cb) {
+        var card = cb.closest('.addon-card');
+        var price = parseInt(card.getAttribute('data-addon-price')) || 0;
+        addonTotal += price;
+      });
+
+      var grandTotal = roomTotal + mealExtra + addonTotal;
+      document.getElementById('summaryTotal').textContent = '₹' + grandTotal.toLocaleString('en-IN');
+    }
+
+    function submitBooking() {
+      var room = document.querySelector('input[name="room"]:checked');
+      var checkin = document.getElementById('checkin').value;
+      var checkout = document.getElementById('checkout').value;
+      var adults = document.getElementById('adults').value;
+      var children = document.getElementById('children').value;
+      var rooms = document.getElementById('rooms').value;
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var email = document.getElementById('email').value;
+      var requests = document.getElementById('requests').value;
+
+      var meal = document.querySelector('input[name="mealplan"]:checked');
+      var pay = document.querySelector('input[name="paymode"]:checked');
+
+      var addons = [];
+      document.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(function(cb) {
+        addons.push(cb.value);
+      });
+
+      var msg = 'Hi! I would like to book a stay at Meridian Hilltop.%0A%0A';
+      msg += '━━ *ROOM & GUESTS* ━━%0A';
+      msg += '*Room:* ' + (room ? room.value : '—') + '%0A';
+      msg += '*Check-in:* ' + (checkin || '—') + '%0A';
+      msg += '*Check-out:* ' + (checkout || '—') + '%0A';
+      msg += '*Adults:* ' + adults + '%0A';
+      msg += '*Children:* ' + children + '%0A';
+      msg += '*Rooms:* ' + rooms + '%0A%0A';
+      msg += '━━ *ADD-ONS* ━━%0A';
+      msg += '*Meal Plan:* ' + (meal ? meal.value : '—') + '%0A';
+      if (addons.length) msg += '*Extras:* ' + addons.join(', ') + '%0A';
+      msg += '%0A━━ *PAYMENT & CONTACT* ━━%0A';
+      msg += '*Name:* ' + (name || '—') + '%0A';
+      msg += '*Phone:* ' + (phone || '—') + '%0A';
+      if (email) msg += '*Email:* ' + email + '%0A';
+      msg += '*Pay Mode:* ' + (pay ? pay.value : '—') + '%0A';
+      if (requests) msg += '*Requests:* ' + requests;
+
+      window.open('https://wa.me/919843977729?text=' + msg, '_blank');
+    }
+
+    // Auto-select room from URL hash
+    function selectRoomFromHash() {
+      var hash = window.location.hash.replace('#', '');
+      if (!hash) return;
+      var target = document.getElementById(hash);
+      if (target && target.classList.contains('room-radio-card')) {
+        target.click();
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // Init
+    updateSummary();
+    selectRoomFromHash();
+    window.addEventListener('hashchange', selectRoomFromHash);
+  </script>
+
+</body>
+</html>

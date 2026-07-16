@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-IN" data-x="html" data-x-toggle="html-overflow-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/vendors.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="image/logo/logo_.png">
+  <title>Gallery - Meridian Hilltop Yercaud</title>
+  <meta name="description" content="Photo gallery of Meridian Hilltop Resort Yercaud. View our rooms, amenities, views, and the beautiful hilltop property." />
+  <style>
+    @media (max-width: 768px) { .baseCard__image { overflow: visible; } .baseCard__badge { bottom: 12px; left: 12px; font-size: 13px; padding: 6px 10px; z-index: 2; } }
+    @media (max-width: 575px) { .header__logo img { height: 95px; width: 100% !important; } }
+    .menuFullScreen__right { width: 35%; } .menuFullScreen-links { gap: 28px; }
+    p { font-size: 15px; color: var(--color-accent-1); margin: 0; }
+    .layout-pb-lg { padding-bottom: 100px; } .layout-pt-lg { padding-top: 90px; }
+    .pt-100 { padding-top: 48px !important; }
+    .menuFullScreen-links-subnav { position: absolute; top: 10%; left: 40%; }
+    @media (max-width: 991px) { .menuFullScreen-links-subnav { overflow: hidden; position: relative; top: unset; left: unset; max-height: 0; padding-left: 0; pointer-events: none; opacity: 1; } }
+    .layout-pt-lg { padding-top: 30px; }
+    .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 65px; height: 65px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s; text-decoration: none; }
+    .whatsapp-float:hover { transform: scale(1.1); color: #fff; }
+    .gallery-grid-item { border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    .gallery-grid-item img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.4s; }
+    .gallery-grid-item:hover img { transform: scale(1.05); }
+    .gallery-grid-item.tall img { height: 400px; }
+    .gallery-section-title { font-family:'Cormorant Garamond',serif; font-size: 36px; color: #122223; margin-bottom: 30px; padding-bottom: 12px; border-bottom: 2px solid #e8e8e8; }
+  </style>
+</head>
+<body>
+  <div class="menuFullScreen js-menuFullScreen">
+    <div class="menuFullScreen__topMobile js-menuFullScreen-topMobile">
+      <div class="d-flex items-center text-white js-menuFullScreen-toggle">
+        <i class="icon-menu text-9"></i>
+        <div class="text-15 uppercase ml-30 sm:d-none">Menu</div>
+      </div>
+      <div><img src="image/logo/logo.png" alt="Meridian Hilltop"></div>
+    </div>
+    <div class="menuFullScreen__mobile__bg js-menuFullScreen-mobile-bg"></div>
+    <div class="menuFullScreen__left">
+      <div class="menuFullScreen__bg js-menuFullScreen-bg"><img src="image/a/2.jpg" alt="bg"></div>
+      <button class="menuFullScreen__close js-menuFullScreen-toggle js-menuFullScreen-close-btn">
+        <span class="icon"><span></span><span></span></span> CLOSE
+      </button>
+      <div class="menuFullScreen-links js-menuFullScreen-links">
+        <div class="menuFullScreen-links__item"><a href="index.html">HOME</a></div>
+        <div class="menuFullScreen-links__item"><a href="booking.html">BOOK NOW</a></div>
+        <div class="menuFullScreen-links__item"><a href="rooms.html">ROOMS</a></div>
+        <div class="menuFullScreen-links__item"><a href="dining.html">DINING</a></div>
+        <div class="menuFullScreen-links__item"><a href="amenities.html">AMENITIES</a></div>
+        <div class="menuFullScreen-links__item"><a href="gallery.html">GALLERY</a></div>
+        <div class="menuFullScreen-links__item"><a href="guide.html">LOCAL GUIDE</a></div>
+        <div class="menuFullScreen-links__item"><a href="policies.html">POLICIES</a></div>
+        <div class="menuFullScreen-links__item"><a href="index.html#contact">CONTACT US</a></div>
+      </div>
+    </div>
+    <div class="menuFullScreen__right js-menuFullScreen-right">
+      <div class="text-center">
+        <div class="mb-100" style="margin-bottom:30px !important"><img src="image/logo/logo_.png" alt="logo" style="width:23%;"></div>
+        <div class="mt-40"><div class="text-30 text-sec fw-500">Location</div><div class="mt-10">Yercaud, Tamil Nadu</div></div>
+        <div class="mt-40">
+          <div class="text-30 text-sec fw-500">Phone Support</div>
+          <div class="mt-10">
+            <div><a href="tel:+919843977729">+91 9843977729</a></div>
+            <div><a href="mailto:meridianhilltopyercaud@gmail.com">meridianhilltopyercaud@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="mt-40"><div class="text-30 text-sec fw-500">Connect With Us</div><div class="mt-10"><a href="tel:+919843977729">+91 9843977729</a></div></div>
+      </div>
+    </div>
+    <div class="menuFullScreen__bottomMobile js-menuFullScreen-buttomMobile">
+      <a href="booking.html" class="button rounded-200 w-1/1 py-20 -light-1 bg-accent-2">BOOK YOUR STAY</a>
+      <a href="tel:+919843977729" class="d-flex items-center mt-40"><i class="icon-phone mr-10"></i><span>+91 9843977729 | +91 4281290739</span></a>
+      <a href="#" class="d-flex mt-20"><i class="icon-map mr-10"></i><span>Yercaud, Tamil Nadu</span></a>
+      <a href="mailto:meridianhilltopyercaud@gmail.com" class="d-flex items-center mt-20"><i class="icon-mail mr-10"></i><span>meridianhilltopyercaud@gmail.com</span></a>
+    </div>
+  </div>
+  <div class="cursor js-cursor">
+    <div class="cursor__wrapper">
+      <div class="cursor__follower js-follower"></div>
+      <div class="cursor__label js-label"></div>
+      <div class="cursor__icon js-icon"></div>
+    </div>
+  </div>
+  <a href="https://wa.me/919843977729?text=Hi! I am Looking for stay!" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+  <main>
+    <header class="header -h-110 -blur js-header" data-add-bg="bg-accent-1" data-x="header" data-x-toggle="-is-menu-opened">
+      <div class="container">
+        <div class="header__container h-full items-center">
+          <div class="header__left d-flex items-center">
+            <button class="d-flex items-center js-menuFullScreen-toggle">
+              <i class="icon-menu text-9 text-white"></i>
+              <div class="text-15 uppercase text-white ml-30 sm:d-none">Menu</div>
+            </button>
+            <div class="d-flex items-center ml-60 xl:d-none">
+              <i class="icon-phone text-20 text-white mr-30"></i>
+              <div class="text-15 uppercase text-white">+91 9843977729</div>
+            </div>
+          </div>
+          <div class="header__center">
+            <div class="header__logo" style="text-align:center;">
+              <a href="index.html"><img src="image/logo/logo.png" alt="Meridian Hilltop" style="width:23%;"></a>
+            </div>
+          </div>
+          <div class="header__right d-flex items-center h-full">
+            <div class="d-flex items-center ml-60 xl:d-none" style="margin-right:1rem !important;">
+              <i class="icon-mail text-20 text-white mr-30"></i>
+              <div class="text-15 text-white">meridianhilltopyercaud@gmail.com</div>
+            </div>
+            <a href="booking.html" class="button -md -outline-white text-white xl:d-none">BOOK NOW</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="hero -type-3 bg-accent-1" style="min-height:auto; padding-bottom:60px;">
+      <div class="container">
+        <div class="row items-center">
+          <div class="col-12 text-center pt-100">
+            <div class="hero__subtitle text-15 uppercase text-white mb-20">PHOTO GALLERY</div>
+            <h1 class="hero__title text-white" style="font-size:72px;">Moments at Meridian</h1>
+            <p class="text-white mt-20" style="opacity:0.8; font-size:17px;">Explore the beauty of our resort through these snapshots.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="layout-pt-lg layout-pb-lg bg-light-1">
+      <div class="container">
+        <h2 class="gallery-section-title">Rooms</h2>
+        <div class="row">
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/1.jpg" alt="Deluxe Room"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/2.jpg" alt="Retro View"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/3.jpg" alt="Valley View"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/4.jpg" alt="Master Suite"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/5.jpg" alt="Presidential Suite"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/r/6.jpg" alt="Family Suite"></div></div>
+        </div>
+        <h2 class="gallery-section-title mt-40">Amenities</h2>
+        <div class="row">
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/1.jpg" alt="LOS DOBAD"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/2.jpg" alt="THAI AROMA"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/3.jpg" alt="JADE SHOWER"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/4.jpg" alt="Swimming Pool"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/5.jpg" alt="MANGAL TENSILE"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/6.jpg" alt="Home Theatre"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/7.jpg" alt="Campfire"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/suites/8.jpg" alt="Indoor Games"></div></div>
+        </div>
+        <h2 class="gallery-section-title mt-40">Resort Views</h2>
+        <div class="row">
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/a/2.jpg" alt="Resort View"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/a/3.jpg" alt="Hill View"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/a/4.jpg" alt="Yercaud Scenery"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/a/5.jpg" alt="Property View"></div></div>
+          <div class="col-lg-4 col-md-6"><div class="gallery-grid-item"><img src="image/a/6.jpg" alt="Yercaud Views"></div></div>
+        </div>
+        <h2 class="gallery-section-title mt-40">Around the Property</h2>
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/1.jpg" alt="Meridian Hilltop"></div></div>
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/2.jpg" alt="Meridian Hilltop"></div></div>
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/3.jpg" alt="Meridian Hilltop"></div></div>
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/4.jpg" alt="Meridian Hilltop"></div></div>
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/5.jpg" alt="Meridian Hilltop"></div></div>
+          <div class="col-lg-3 col-md-4 col-6"><div class="gallery-grid-item"><img src="image/s/6.jpg" alt="Meridian Hilltop"></div></div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer -type-2 bg-accent-1 -text-white"><div class="footer__main"><div class="container"><div class="footer__grid">
+      <div><h4 class="text-30 fw-500 mb-10">About Us</h4><div class="d-flex flex-column"><img src="image/logo/logo_.png" alt="Meridian Hilltop" style="width:60%; margin-bottom:15px;"><p class="text-white">Escape to Meridian Hilltop Resort, where luxury meets tranquility amidst the scenic hills of Yercaud at 5,000 ft.</p></div></div>
+      <div><h4 class="text-30 fw-500 mb-10">Location</h4><div class="d-flex flex-column md:mt-20"><div><a class="d-block text-15 lh-17 mb-20" href="#">Meridian Hill Top,<br>MGR Nagar (Way To Shevaroyan Temple),<br>Yercaud, Tamil Nadu 636602</a></div><div class="d-flex flex-column"><div><a class="d-block text-15" href="tel:+919843977729">+91 9843977729<br>+91 4281290739</a></div><div class="mt-10"><a class="d-block text-15" href="mailto:meridianhilltopyercaud@gmail.com">meridianhilltopyercaud@gmail.com</a></div></div></div><div class="text-15 mt-20">Social Media Pages</div><div class="row x-gap-25 y-gap-10 items-center pt-20 md:pt-40"><div class="col-auto"><a href="https://www.instagram.com/meridian_hilltop" target="_blank" class="d-flex"><i class="icon-instagram text-13"></i></a></div><div class="col-auto"><a href="https://www.facebook.com/105141808643495" target="_blank" class="d-flex"><i class="icon-facebook text-13"></i></a></div></div></div>
+      <div><h4 class="text-30 fw-500">Quick Links</h4><div class="d-flex flex-column mt-40 md:mt-20"><div class="mb-20"><a class="d-block text-15" href="index.html">Home</a></div><div class="mb-20"><a class="d-block text-15" href="booking.html">Book Now</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Rooms</a></div><div class="mb-20"><a class="d-block text-15" href="dining.html">Dining</a></div><div class="mb-20"><a class="d-block text-15" href="amenities.html">Amenities</a></div><div class="mb-20"><a class="d-block text-15" href="gallery.html">Gallery</a></div><div class="mb-20"><a class="d-block text-15" href="guide.html">Local Guide</a></div><div class="mb-20"><a class="d-block text-15" href="policies.html">Policies</a></div><div class="mb-20"><a class="d-block text-15" href="index.html#contact">Contact Us</a></div></div></div>
+      <div><h4 class="text-30 fw-500">Room Types</h4><div class="d-flex flex-column mt-40 md:mt-20"><div class="mb-20"><a class="d-block text-15" href="rooms.html">Deluxe Room</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Retro View</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Valley View / Club</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Master Suite</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Presidential Suite</a></div><div class="mb-20"><a class="d-block text-15" href="rooms.html">Family Suite</a></div></div></div>
+    </div></div></div><div class="footer__bottom"><div class="container"><div class="row y-gap-30 justify-between md:justify-center items-center"><div class="col-sm-auto"><div class="text-15 text-center">Copyright &copy; 2026 Meridian Hilltop &mdash; Crafted by <a href="https://cognisutra.in" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Cognisutra</a></div></div></div></div></div></footer>
+  </main>
+  <script src="js/vendors.js"></script>
+  <script src="js/main.js"></script>
+  <script>(function(){var m=document.querySelector('.js-menuFullScreen');if(!m)return;function o(){m.classList.add('is-active');document.body.classList.add('overflow-hidden')}function c(){m.classList.remove('is-active');document.body.classList.remove('overflow-hidden')}document.querySelectorAll('.js-menuFullScreen-toggle').forEach(function(e){e.addEventListener('click',function(){m.classList.contains('is-active')?c():o()})});document.querySelectorAll('.js-menuFullScreen-close-btn').forEach(function(e){e.addEventListener('click',c)});document.querySelectorAll('.menuFullScreen-links a').forEach(function(e){e.addEventListener('click',c)})})();</script>
+</body>
+</html>
